@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thirupathi - Staff AI Engineer, SaaS Founder, & Full-Stack Developer. Building premium deep-space intelligence products and elite web solutions.">
+    <meta name="keywords" content="Software Engineer, Full Stack Developer, AI Engineer, SaaS Founder, Three.js, WebGL, GSAP, Space Tech">
+    <meta name="author" content="Thirupathi">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Thirupathi | Staff AI Engineer & SaaS Founder">
+    <meta property="og:description" content="Portfolio of Thirupathi: Building elite SaaS and space-technology systems powered by artificial intelligence.">
+    <meta property="og:image" content="assets/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Thirupathi | Staff AI Engineer & SaaS Founder">
+    <meta property="twitter:description" content="Portfolio of Thirupathi: Building elite SaaS and space-technology systems powered by artificial intelligence.">
+
+    <title>Thirupathi | Deep-Space AI HQ & SaaS Portfolio</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Scripts (External CDN Libraries) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+</head>
+<body>
+    <!-- Preloader / Holographic Splash Screen -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <svg width="60" height="60" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="45" stroke="#00D4FF" stroke-width="2" stroke-dasharray="10 5" class="spin-slow" />
+                    <polygon points="50,25 75,65 25,65" stroke="#00F5FF" stroke-width="3" fill="rgba(0, 245, 255, 0.1)" />
+                    <circle cx="50" cy="50" r="5" fill="#7C4DFF" class="pulse" />
+                </svg>
+            </div>
+            <div class="preloader-text">
+                <div class="preloader-title">ORBITAL SYSTEMS INITIALIZING</div>
+                <div class="preloader-status">CONNECTING TO SPACECRAFT TELEMETRY...</div>
+                <div class="preloader-progress-bar"><div id="preloader-progress" class="preloader-progress"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WebGL deep space canvas background -->
+    <canvas id="space-canvas" class="space-canvas"></canvas>
+
+    <!-- UI Overlay Grid (Futuristic HUD elements) -->
+    <div class="hud-lines"></div>
+    <div class="hud-scanner"></div>
+
+    <!-- Main Navigation Bar -->
+    <header class="navbar" id="navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo-container">
+                <svg width="36" height="36" viewBox="0 0 100 100" fill="none">
+                    <polygon points="50,15 85,75 15,75" stroke="#00D4FF" stroke-width="4" fill="rgba(0, 212, 255, 0.1)" />
+                    <circle cx="50" cy="55" r="12" stroke="#7C4DFF" stroke-width="2" fill="none" />
+                    <circle cx="50" cy="55" r="4" fill="#00FFB3" />
+                </svg>
+                <div class="logo-text">
+                    <span class="logo-title">AETHERIS</span>
+                    <span class="logo-subtitle">TACTICAL STATION</span>
+                </div>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <a href="#about" class="nav-link"><span>01.</span> ABOUT</a>
+                <a href="#experience" class="nav-link"><span>02.</span> TIMELINE</a>
+                <a href="#skills" class="nav-link"><span>03.</span> CONSTELLATION</a>
+                <a href="#projects" class="nav-link"><span>04.</span> SHOWCASE</a>
+                <a href="#ai-hub" class="nav-link"><span>05.</span> IT CORE</a>
+                <a href="#contact" class="nav-link"><span>06.</span> UPLINK</a>
+            </nav>
+
+            <div class="nav-telemetry">
+                <span class="telemetry-dot blinking"></span>
+                <span class="telemetry-text" id="telemetry-status">STATION: ACTIVE | APOGEE: 428KM</span>
+            </div>
+
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="section-container hero-container">
+                <div class="hero-left">
+                    <div class="hero-badge" id="hero-badge">
+                        <span class="badge-dot"></span>
+                        <span class="badge-text">MISSION LOG: DEEP-SPACE APPARATUS</span>
+                    </div>
+                    
+                    <h1 class="hero-heading">
+                        <span class="hero-intro">I AM</span>
+                        <span class="hero-name">THIRUPATHI</span>
+                        <span class="hero-tagline">Architect of Space Tech & AI SaaS Platforms</span>
+                    </h1>
+
+                    <p class="hero-desc">
+                        Engineering elite, high-performance software systems operating at the nexus of <span class="highlight ai">Artificial Intelligence</span>, <span class="highlight saas">Next-Gen SaaS Architectures</span>, and <span class="highlight tech">Autonomous Space Technology</span>. Delivering Apple-grade design mechanics with SpaceX-level technical performance.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary magnetic">
+                            <span>LAUNCH SHOWCASE</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <a href="#contact" class="btn btn-secondary magnetic">
+                            <span>ESTABLISH UPLINK</span>
+                        </a>
+                    </div>
+
+                    <div class="hero-socials">
+                        <a href="https://github.com/thirukd007" target="_blank" rel="noopener" class="social-link" title="GitHub">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/thirupathi-m-694273396" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        </a>
+                        <a href="https://www.instagram.com/_remo_thiru_27?igsh=MW45bDI5Mjd6cWRuZw==" target="_blank" rel="noopener" class="social-link" title="Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </a>
+                        <a href="mailto:contact@thirupathi.dev" class="social-link" title="Email">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-right">
+                    <!-- WebGL AI Core and Orbit Sphere -->
+                    <div id="ai-core-container" class="ai-core-container">
+                        <canvas id="ai-core-canvas"></canvas>
+                        <!-- Holographic metrics overlay -->
+                        <div class="hologram-telemetry">
+                            <div class="holo-stat"><span class="holo-label">CORE FREQ:</span> <span class="holo-val font-mono animate-pulse">4.92 PFLOPS</span></div>
+                            <div class="holo-stat"><span class="holo-label">THERMALS:</span> <span class="holo-val font-mono text-cyan-400">1.8 K</span></div>
+                            <div class="holo-stat"><span class="holo-label">SHIELD CAP:</span> <span class="holo-val font-mono text-emerald-400">99.87%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scroll-indicator">
+                <span class="scroll-mouse"><span class="scroll-wheel"></span></span>
+                <span class="scroll-text">PULL GRAVITY WELL TO SCAN DOWNWARD</span>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section scroll-reveal">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-number">01 //</span>
+                    <h2 class="section-title">COMMANDER PROFILE</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-card story-card glass-card">
+                        <h3 class="card-title text-cyan-400">MISSION LOG & STORY</h3>
+                        <p>I operate at the vanguard of software development, engineering robust full-stack platforms and custom artificial intelligence architectures that power aerospace operations and high-growth enterprise SaaS businesses.</p>
+                        <p>With a design aesthetic focused on high fidelity, data dense systems, and micro-interactivity, I ensure every experience functions like a custom-designed dashboard inside a cutting-edge spacecraft command deck.</p>
+                        <blockquote class="mission-statement">
+                            <span class="quote-mark">“</span>TO BUILD SOFTWARE THAT ELEVATES HUMAN CAPABILITY BEYOND DIGITAL HORIZONS, RECONCILING ABSOLUTE SPEED WITH VISUAL SPLENDOR.<span class="quote-mark">”</span>
+                        </blockquote>
+                    </div>
+
+                    <div class="about-card stats-card glass-card">
+                        <h3 class="card-title text-purple-400">STATISTICAL DATA</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item" id="stat-experience">
+                                <div class="stat-value"><span class="count-up" data-target="5">0</span>+</div>
+                                <div class="stat-label">YEARS IN ORBIT (EXP)</div>
+                            </div>
+                            <div class="stat-item" id="stat-products">
+                                <div class="stat-value"><span class="count-up" data-target="15">0</span>+</div>
+                                <div class="stat-label">SAAS SYSTEMS LAUNCHED</div>
+                            </div>
+                            <div class="stat-item" id="stat-funding">
+                                <div class="stat-value">$<span class="count-up" data-target="20">0</span>M+</div>
+                                <div class="stat-label">CLIENT VENTURE FUNDING</div>
+                            </div>
+                            <div class="stat-item" id="stat-reliability">
+                                <div class="stat-value"><span class="count-up" data-target="99.9">0</span>%</div>
+                                <div class="stat-label">SYSTEM UPTIME MAINTAINED</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Timeline Section -->
+        <section id="experience" class="experience-section scroll-reveal">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-number">02 //</span>
+                    <h2 class="section-title">ORBITAL TIMELINE</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="timeline-container">
+                    <!-- Dynamic timeline track -->
+                    <div class="timeline-line"><div class="timeline-progress" id="timeline-progress"></div></div>
+
+                    <!-- Timeline Item 1 -->
+                    <div class="timeline-item glass-card right">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-meta">
+                            <span class="timeline-date">2024 - PRESENT</span>
+                            <span class="timeline-org">ORBITAL LABS INC.</span>
+                        </div>
+                        <h3 class="timeline-role">Staff AI Architect & SaaS Founder</h3>
+                        <p class="timeline-desc">Leading design and execution of multi-agent LLM systems for telemetry scheduling. Integrated high-throughput RAG vectors analyzing planetoid imagery datasets. Scaled foundational systems achieving 120ms average response Latency.</p>
+                        <div class="timeline-tags">
+                            <span class="timeline-tag">AI Agents</span>
+                            <span class="timeline-tag">NextJS</span>
+                            <span class="timeline-tag">WebGL</span>
+                            <span class="timeline-tag">Python/PyTorch</span>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 2 -->
+                    <div class="timeline-item glass-card left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-meta">
+                            <span class="timeline-date">2022 - 2024</span>
+                            <span class="timeline-org">NEBULA SAAS CORP</span>
+                        </div>
+                        <h3 class="timeline-role">Lead Full Stack Engineer</h3>
+                        <p class="timeline-desc">Architected micro-frontend visualization frameworks monitoring real-time logistics. Created custom WebGL telemetry mapping components, boosting system speed by 300%. Coordinated secure database migrations on MongoDB clusters.</p>
+                        <div class="timeline-tags">
+                            <span class="timeline-tag">TypeScript</span>
+                            <span class="timeline-tag">Three.js</span>
+                            <span class="timeline-tag">Node/Express</span>
+                            <span class="timeline-tag">MongoDB</span>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 3 -->
+                    <div class="timeline-item glass-card right">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-meta">
+                            <span class="timeline-date">2020 - 2022</span>
+                            <span class="timeline-org">STARWARD AUTO SYSTEMS</span>
+                        </div>
+                        <h3 class="timeline-role">Co-Founder & Lead Engineer</h3>
+                        <p class="timeline-desc">Designed cloud deployment engine optimizing compute resource scaling. Built responsive telemetry client panels using raw Web APIs and CSS Variables, onboarding 15k+ active accounts with $2M annual recurring revenue.</p>
+                        <div class="timeline-tags">
+                            <span class="timeline-tag">React</span>
+                            <span class="timeline-tag">Docker</span>
+                            <span class="timeline-tag">AWS Cloud</span>
+                            <span class="timeline-tag">Tailwind</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Skills Constellation Section -->
+        <section id="skills" class="skills-section scroll-reveal">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-number">03 //</span>
+                    <h2 class="section-title">SKILLS CONSTELLATION MAP</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <p class="section-intro">
+                    Hover over stars to load skill frequencies and trace the orbital linkages between core technologies.
+                </p>
+
+                <div class="skills-map-container">
+                    <canvas id="skills-constellation-canvas"></canvas>
+                    <div id="skills-detail-panel" class="skills-detail-panel glass-card">
+                        <div class="skills-detail-header">
+                            <span id="skill-tech-icon" class="skill-icon-placeholder">★</span>
+                            <div class="skill-meta">
+                                <h4 id="skill-name">Select Node</h4>
+                                <span id="skill-category">Category</span>
+                            </div>
+                        </div>
+                        <div class="skill-bar-container">
+                            <div class="skill-bar-label">SYSTEM LOAD CAPACITY (EXPERTISE):</div>
+                            <div class="skill-bar"><div id="skill-level" class="skill-level-fill" style="width: 0%"></div></div>
+                            <span id="skill-percentage" class="skill-percentage">0%</span>
+                        </div>
+                        <p id="skill-desc" class="skill-desc">Hover over any node in the constellation system to query live telemetry logs on skills proficiency.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- General SaaS Project Showcase -->
+        <section id="projects" class="projects-section scroll-reveal">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-number">04 //</span>
+                    <h2 class="section-title">MISSION PROJECTS</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project Card 1 -->
+                    <div class="project-card glass-card">
+                        <div class="project-header">
+                            <div class="project-badge">SAAS ARCHITECTURE</div>
+                            <div class="project-links">
+                                <a href="https://github.com" target="_blank" rel="noopener" class="proj-link-icon" title="View Code">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                </a>
+                                <a href="https://vercel.com" target="_blank" rel="noopener" class="proj-link-icon" title="Launch App">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-mockup text-center">
+                            <!-- Visual placeholder representing dashboard -->
+                            <div class="holo-grid-visual visual-console"></div>
+                        </div>
+                        <h3 class="project-title">APEX CLOUD CONSOLE</h3>
+                        <p class="project-desc">A premium distributed serverless infrastructure console. Orchestrates real-time telemetry from multiple cloud domains and renders micro-aggregates in a responsive dashboard with 0.02ms refresh Latency.</p>
+                        <div class="project-metrics">
+                            <div class="metric-box">
+                                <span class="metric-val">0.02ms</span>
+                                <span class="metric-lbl">REFRESH SPEED</span>
+                            </div>
+                            <div class="metric-box">
+                                <span class="metric-val">12M+</span>
+                                <span class="metric-lbl">API REQUESTS/DAY</span>
+                            </div>
+                        </div>
+                        <div class="project-tech-tags">
+                            <span class="tech-tag">NextJS 15</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Socket.io</span>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 2 -->
+                    <div class="project-card glass-card">
+                        <div class="project-header">
+                            <div class="project-badge">SPACE TECH TELEMETRY</div>
+                            <div class="project-links">
+                                <a href="https://github.com" target="_blank" rel="noopener" class="proj-link-icon" title="View Code">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                </a>
+                                <a href="https://vercel.com" target="_blank" rel="noopener" class="proj-link-icon" title="Launch App">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-mockup text-center">
+                            <!-- Orbit mapping visualizer -->
+                            <div class="holo-grid-visual visual-orbit"></div>
+                        </div>
+                        <h3 class="project-title">HELIOS ORBIT UI</h3>
+                        <p class="project-desc">Autonomous telemetry visualization application designed for orbital payload tracking. Displays real-time satellite orbital traces and computes payload coordinates with 100% telemetry resolution.</p>
+                        <div class="project-metrics">
+                            <div class="metric-box">
+                                <span class="metric-val">100%</span>
+                                <span class="metric-lbl">COORD ACCURACY</span>
+                            </div>
+                            <div class="metric-box">
+                                <span class="metric-val">180 FPS</span>
+                                <span class="metric-lbl">CANVAS RENDER</span>
+                            </div>
+                        </div>
+                        <div class="project-tech-tags">
+                            <span class="tech-tag">Three.js</span>
+                            <span class="tech-tag">GSAP</span>
+                            <span class="tech-tag">Tailwind CSS</span>
+                            <span class="tech-tag">WebGPU</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Project Section -->
+        <section id="ai-hub" class="ai-hub-section scroll-reveal">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-number">05 //</span>
+                    <h2 class="section-title">IT CORE SYSTEMS & INFRASTRUCTURE</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="ai-grid">
+                    <!-- AI Project Card 1 -->
+                    <div class="ai-card glass-card">
+                        <div class="ai-card-glow text-cyan-400"></div>
+                        <div class="ai-card-header">
+                            <div class="ai-node-indicator">
+                                <span class="pulse-ring"></span>
+                                <span class="pulse-center"></span>
+                            </div>
+                            <div class="ai-card-badge">CLOUD INFRASTRUCTURE</div>
+                        </div>
+                        <h3 class="ai-card-title">AETHERIS CLOUD ORCHESTRATOR</h3>
+                        <p class="ai-card-desc">A multi-region cloud infrastructure platform managing auto-scaling compute clusters, load-balanced microservices, and real-time monitoring dashboards across distributed data centers.</p>
+                        <div class="ai-card-stats">
+                            <div class="ai-stat-box">
+                                <span class="ai-stat-val">99.99%</span>
+                                <span class="ai-stat-lbl">SYSTEM UPTIME</span>
+                            </div>
+                            <div class="ai-stat-box">
+                                <span class="ai-stat-val">0.3s</span>
+                                <span class="ai-stat-lbl">DEPLOY PIPELINE</span>
+                            </div>
+                        </div>
+                        <div class="ai-card-logs font-mono">
+                            <div class="log-line">>> cloud_cluster_1: healthy</div>
+                            <div class="log-line">>> infra_status: 100% operational</div>
+                        </div>
+                    </div>
+
+                    <!-- AI Project Card 2 -->
+                    <div class="ai-card glass-card">
+                        <div class="ai-card-glow text-purple-400"></div>
+                        <div class="ai-card-header">
+                            <div class="ai-node-indicator">
+                                <span class="pulse-ring"></span>
+                                <span class="pulse-center bg-purple"></span>
+                            </div>
+                            <div class="ai-card-badge">ENTERPRISE SAAS</div>
+                        </div>
+                        <h3 class="ai-card-title">SPECTRA ENTERPRISE PLATFORM</h3>
+                        <p class="ai-card-desc">Full-stack enterprise SaaS platform with role-based access control, real-time analytics dashboards, multi-tenant database architecture, and automated billing & subscription management systems.</p>
+                        <div class="ai-card-stats">
+                            <div class="ai-stat-box">
+                                <span class="ai-stat-val">4.2M</span>
+                                <span class="ai-stat-lbl">TRANSACTIONS / DAY</span>
+                            </div>
+                            <div class="ai-stat-box">
+                                <span class="ai-stat-val">15ms</span>
+                                <span class="ai-stat-lbl">API RESPONSE TIME</span>
+                            </div>
+                        </div>
+                        <div class="ai-card-logs font-mono">
+                            <div class="log-line">>> saas_core: running v3.8.2</div>
+                            <div class="log-line">>> tenant_sync: passed (0 drift)</div>
+                        </div>
+                    </div>
+
+                    <!-- AI Project Card 3 -->
+                    <div class="ai-card glass-card">
+                        <div class="ai-card-glow text-yellow-400"></div>
+                        <div class="ai-card-header">
+                            <div class="ai-node-indicator">
+                                <span class="pulse-ring"></span>
+                                <span class="pulse-center bg-yellow"></span>
+                            </div>
+                            <div class="ai-card-badge">DEVOPS AUTOMATION</div>
+                        </div>
+                        <h3 class="ai-card-title">TITAN CI/CD PIPELINE ENGINE</h3>
+                        <p class="ai-card-desc">End-to-end DevOps automation engine powering continuous integration, containerized deployment pipelines, infrastructure-as-code provisioning, and real-time system health monitoring across production clusters.</p>
+                        <div class="ai-card-stats">
+                            <div class="ai-stat-box">
+                                <span class="ai-stat-val">98.9%</span>
+                                <span class="ai-stat-lbl">BUILD SUCCESS RATE</span>
+                            </div>
+                            <div class="ai-stat-box">
+                                <span class="ai-stat-val">120+</span>
+                                <span class="ai-stat-lbl">DAILY DEPLOYMENTS</span>
+                            </div>
+                        </div>
+                        <div class="ai-card-logs font-mono">
+                            <div class="log-line">>> ci_pipeline: running</div>
+                            <div class="log-line">>> k8s_cluster: 92% capacity</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements" class="achievements-section scroll-reveal">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-number">06 //</span>
+                    <h2 class="section-title">COMMAND SYSTEM ACCOLADES</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="achievements-grid">
+                    <!-- Achievement 1 -->
+                    <div class="achievement-card glass-card">
+                        <div class="ach-icon text-yellow-400">🏆</div>
+                        <div class="ach-content">
+                            <h4 class="ach-title">GLOBAL SPACETECH HACKATHON WINNER</h4>
+                            <p class="ach-desc">Awarded First Place out of 400+ international developers for building an autonomous orbital collision forecasting visualizer built using Rust and WebGL.</p>
+                        </div>
+                    </div>
+
+                    <!-- Achievement 2 -->
+                    <div class="achievement-card glass-card">
+                        <div class="ach-icon text-cyan-400">🚀</div>
+                        <div class="ach-content">
+                            <h4 class="ach-title">TOP AI SAAS INNOVATOR AWARD</h4>
+                            <p class="ach-desc">Recognized by the Space Developer Coalition for outstanding engineering design in distributed agent systems executing autonomous telemetry processing.</p>
+                        </div>
+                    </div>
+
+                    <!-- Achievement 3 -->
+                    <div class="achievement-card glass-card">
+                        <div class="ach-icon text-purple-400">🎓</div>
+                        <div class="ach-content">
+                            <h4 class="ach-title">AWS CERTIFIED SOLUTIONS ARCHITECT</h4>
+                            <p class="ach-desc">Professional Level validation. Certified expertise in orchestrating highly resilient, auto-scaling, and secure serverless infrastructures over multi-cloud zones.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Section -->
+        <section id="testimonials" class="testimonials-section scroll-reveal">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-number">07 //</span>
+                    <h2 class="section-title">SECTOR COMMENDATIONS</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="testimonials-grid">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card glass-card">
+                        <div class="test-rating">★★★★★</div>
+                        <p class="test-quote">"Thirupathi engineered our entire payload telemetry system dashboard. The design feels like it belongs in the year 2040, and the performance under peak data feeds remains butter-smooth. An absolute genius."</p>
+                        <div class="test-author">
+                            <div class="author-avatar cyan-glow">A.V.</div>
+                            <div class="author-info">
+                                <span class="author-name">Dr. Andrew Vance</span>
+                                <span class="author-role">VP of Product, Apex Space Labs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card glass-card">
+                        <div class="test-rating">★★★★★</div>
+                        <p class="test-quote">"The level of attention given to tiny interactive micro-animations is outstanding. Our conversion rate increased by 42% after launching the new SaaS product layout Thirupathi designed and implemented."</p>
+                        <div class="test-author">
+                            <div class="author-avatar purple-glow">E.R.</div>
+                            <div class="author-info">
+                                <span class="author-name">Elena Rostova</span>
+                                <span class="author-role">Founder, Spectra AI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section scroll-reveal">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-number">08 //</span>
+                    <h2 class="section-title">ESTABLISH MISSION UPLINK</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info glass-card">
+                        <h3 class="contact-heading text-cyan-400">TELEMETRY FREQUENCIES</h3>
+                        <p class="contact-desc">Ready to launch your next mission or build a high-performance SaaS engine? Connect directly with the tactical station to negotiate project telemetry.</p>
+                        
+                        <div class="info-list">
+                            <div class="info-item">
+                                <span class="info-label">COMS FREQUENCY:</span>
+                                <a href="mailto:contact@thirupathi.dev" class="info-value font-mono">contact@thirupathi.dev</a>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">COGNITIVE HUB:</span>
+                                <a href="https://github.com/thirukd007" target="_blank" rel="noopener" class="info-value font-mono">github.com/thirukd007</a>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">NETWORKING LINK:</span>
+                                <a href="https://www.linkedin.com/in/thirupathi-m-694273396" target="_blank" rel="noopener" class="info-value font-mono">linkedin.com/in/thirupathi-m-694273396</a>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">SOCIAL FREQUENCY:</span>
+                                <a href="https://www.instagram.com/_remo_thiru_27?igsh=MW45bDI5Mjd6cWRuZw==" target="_blank" rel="noopener" class="info-value font-mono">instagram.com/_remo_thiru_27</a>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">COMS ENCRYPTION:</span>
+                                <span class="info-value font-mono text-emerald-400">AES-256 GCM</span>
+                            </div>
+                        </div>
+
+                        <!-- Mini animated radar sweep graphic -->
+                        <div class="radar-container">
+                            <div class="radar-sweep"></div>
+                            <div class="radar-circle circle-1"></div>
+                            <div class="radar-circle circle-2"></div>
+                            <div class="radar-circle circle-3"></div>
+                            <div class="radar-blip"></div>
+                            <span class="radar-text">SCANNING FOR INCOMING SIGNALS...</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-terminal glass-card">
+                        <div class="terminal-header">
+                            <span class="term-dot red"></span>
+                            <span class="term-dot yellow"></span>
+                            <span class="term-dot green"></span>
+                            <span class="terminal-title">TRANSMITTER SIGNAL CONSOLE</span>
+                        </div>
+                        <div class="terminal-body">
+                            <form id="contact-form" class="terminal-form">
+                                <div class="form-group">
+                                    <label for="name" class="form-label font-mono">> ENTER TRANSMITTER NAME:</label>
+                                    <input type="text" id="name" name="name" class="form-input" required autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="form-label font-mono">> SPECIFY RETURN IP/EMAIL FREQUENCY:</label>
+                                    <input type="email" id="email" name="email" class="form-input" required autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message" class="form-label font-mono">> INSCRIBE ENCRYPTED SIGNAL MESSAGE:</label>
+                                    <textarea id="message" name="message" class="form-input form-textarea" required></textarea>
+                                </div>
+                                <button type="submit" id="form-submit-btn" class="btn btn-primary btn-full font-mono">
+                                    <span>TRANSMIT SIGNAL</span>
+                                </button>
+                            </form>
+                            
+                            <!-- Tactical feedback terminal logs -->
+                            <div id="terminal-logs" class="terminal-logs font-mono hidden">
+                                <div class="log-row info">>> [SYSTEM]: Initializing communication bridge...</div>
+                                <div class="log-row info">>> [CRYPTO]: Structuring secure transmission envelope...</div>
+                                <div class="log-row info">>> [UPLINK]: Establishing handshakes with node.thirupathi.dev...</div>
+                                <div class="log-row success animate-pulse">>> [SUCCESS]: Signal fully synchronized! Status Code: 200 OK.</div>
+                                <button id="terminal-reset" class="btn btn-secondary btn-sm mt-4 font-mono">RESET SIGNAL TERMINAL</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="section-container footer-container">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <svg width="24" height="24" viewBox="0 0 100 100" fill="none">
+                        <polygon points="50,15 85,75 15,75" stroke="#00D4FF" stroke-width="6" fill="none" />
+                        <circle cx="50" cy="55" r="8" fill="#7C4DFF" />
+                    </svg>
+                    <span class="footer-logo-text">AETHERIS STATION</span>
+                </div>
+                <p class="footer-copy">© 2026 THIRUPATHI. PROJECTS ACTIVE INTERNATIONALLY. DATA CHANNELS SECURED.</p>
+            </div>
+            
+            <div class="footer-right">
+                <div class="footer-diagnostics">
+                    <span class="diag-label">MEM SYSTEM:</span> <span class="diag-val">NORMAL</span>
+                    <span class="diag-divider">|</span>
+                    <span class="diag-label">FPS:</span> <span class="diag-val" id="fps-counter">60.0</span>
+                    <span class="diag-divider">|</span>
+                    <span class="diag-label">PING:</span> <span class="diag-val" id="ping-counter">12ms</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Web Application Entry Point Script -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
